@@ -50,3 +50,16 @@ describe('Ship: Functions', () => {
     expect(ship.isSunk()).toBe(true)
   })
 })
+
+describe('Ship: Static Functions', () => {
+  let ship
+
+  beforeEach(() => {
+    ship = new Ship(3)
+  })
+
+  test('placeShip gives a ship a set of coordinates', () => {
+    Ship.placeShip([3, 5], ship)
+    expect(ship.coordinates).toStrictEqual([3, 5])
+  })
+})
