@@ -16,6 +16,10 @@ describe('Ship: Properties', () => {
   test('has a hits property', () => {
     expect(ship).toHaveProperty('hits')
   })
+
+  test('has an id property', () => {
+    expect(ship).toHaveProperty('id')
+  })
 })
 
 describe('Ship: Functions', () => {
@@ -51,15 +55,14 @@ describe('Ship: Functions', () => {
   })
 })
 
-describe('Ship: Static Functions', () => {
+describe('Ship: Static Methods', () => {
   let ship
 
   beforeEach(() => {
     ship = new Ship(3)
   })
 
-  test('placeShip gives a ship a set of coordinates', () => {
-    Ship.placeShip([3, 5], ship)
-    expect(ship.coordinates).toStrictEqual([3, 5])
+  it('findShip returns a ship based on ID', () => {
+    expect(Ship.findShip(ship.id)).toBe(ship)
   })
 })
