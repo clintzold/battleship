@@ -14,6 +14,8 @@ export default class Ship {
     Ship.#instances.add(this)
   }
 
+  // PUBLIC METHODS
+  //
   // Increments hit points
   hit() {
     this.hits++
@@ -25,7 +27,7 @@ export default class Ship {
   }
 
   // STATIC METHODS
-
+  //
   // Returns an Instance of Ship based on unique ID
   static findShip(shipId) {
     return Ship.getAllInstances().find(inst => inst.id === shipId)

@@ -1,5 +1,7 @@
 // ./src/tests/Gameboard.test.js
 import Gameboard from '../modules/Gameboard.js'
+import Ship from '../modules/Ship.js'
+
 
 describe('Gameboard: Grid', () => {
   let gameboard
@@ -7,7 +9,7 @@ describe('Gameboard: Grid', () => {
     gameboard = new Gameboard()
   })
 
-  it('exists as a property that is an Object', () => {
+  it('is a plain javascript Object', () => {
     expect(gameboard).toHaveProperty('grid')
     expect(typeof gameboard.grid).toBe('object')
   })
@@ -44,11 +46,52 @@ describe('Gameboard: Functions', () => {
     gameboard = new Gameboard()
   })
 
-  it("has a receiveHit() function that changes grid coordinates 'hit' property to true", () => {
-    const coordinate = '1-1'
+  describe('placeShip()', () => {
+    it('adds an instance of the Ship class to the ship key at a given coordinate', () => {
+      const ship = new Ship(3)
 
-    expect(gameboard.grid[coordinate].hit).toBe(false)
-    gameboard.receiveHit(coordinate)
-    expect(gameboard.grid['1-1'].hit).toBe(true)
+      expect(gameboard.grid['1-1'].ship).toBe(null)
+      gameboard.placeShip('1-1', ship.id)
+      expect(gameboard.grid['1-1'].ship).toBe(ship)
+    })
+  })
+
+  describe('receiveHit()', () => {
+    it("changes grid coordinates 'hit' property to true", () => {
+      const coordinate = '1-1'
+
+      expect(gameboard.grid[coordinate].hit).toBe(false)
+      gameboard.receiveHit(coordinate)
+      expect(gameboard.grid['1-1'].hit).toBe(true)
+    })
+
+    it('increments the hit property of a ship if it exists within the coordinate', () => {
+      const ship = new Ship(3)
+      gameboard.placeShip('1-1', ship.id)
+      gameboard.receiveHit('1-1')
+      expect(ship.hits).toBe(1)
+    })
+
+    it('throws an error if coordinate has already been hit', () => {
+      gameboard.receiveHit('1-1')
+
+      expect(() => gameboard.receiveHit('1-1')).toThrow(Error)
+
+    })
+  })
+})
+
+describe('Gameboard: Ships', () => {
+  let gameboard
+
+  beforeEach(() => {
+    gameboard = new Gameboard
+  })
+  it('exists as a class property', () => {
+    expect(gameboard).toHaveProperty('ships')
+  })
+  it('contains 5 instances of Ship', () => {
+    expect(gameboard.ships.length).toBe(5)
+    expect(gameboard.ships[0]).toBeInstanceOf(Ship)
   })
 })

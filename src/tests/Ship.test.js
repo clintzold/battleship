@@ -1,5 +1,5 @@
 // ./src/tests/ship.test.js
-import Ship from '../modules/ship.js'
+import Ship from '../modules/Ship.js'
 
 test('creates a new Ship instance', () => {
   const ship = new Ship(3)
