@@ -18,6 +18,11 @@ export default class Gameboard {
     this.#hitShip(this.grid[coordinate].ship)
   }
 
+  allSunk() {
+    const statuses = this.ships.map(ship => ship.isSunk())
+    return statuses.every(val => val === true)
+  }
+
   // PRIVATE METHODS
   //
   // Record coordinate attacks

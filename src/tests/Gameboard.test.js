@@ -74,9 +74,23 @@ describe('Gameboard: Functions', () => {
 
     it('throws an error if coordinate has already been hit', () => {
       gameboard.receiveHit('1-1')
-
       expect(() => gameboard.receiveHit('1-1')).toThrow(Error)
+    })
+  })
+  
+  describe('allSunk()', () => {
+    
+    it('returns false if all ships are not sunk', () => {
+      expect(gameboard.allSunk()).toBe(false)
+    })
 
+    it('returns true if all ships are sunk', () => {
+      gameboard.ships.forEach(ship => {
+        for (let i = 0; i < ship.length; i++) {
+          ship.hit()
+        }
+      })
+      expect(gameboard.allSunk()).toBe(true)
     })
   })
 })
