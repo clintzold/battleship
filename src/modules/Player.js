@@ -23,7 +23,7 @@ export class Player {
 
   static changeTurn() {
     Player.allPlayers().forEach(player => {
-      if(player.turn) {
+      if (player.turn) {
         player.turn = false
       } else {
         player.turn = true
@@ -36,5 +36,7 @@ export class ComputerPlayer extends Player {
   constructor() {
     super()
     this.turn = false
+
   }
+  
 }

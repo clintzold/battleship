@@ -70,4 +70,9 @@ describe('ComputerPlayer', () => {
   it('is stored in the Player class static variable array', () => {
     expect(Player.allPlayers().at(-1)).toBeInstanceOf(ComputerPlayer)
   })
+
+  describe('ComputerPlayer: Functions', () => {
+    describe('attack()', () => {
+    })
+  })
 })
