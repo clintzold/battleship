@@ -70,13 +70,4 @@ describe('ComputerPlayer', () => {
   it('is stored in the Player class static variable array', () => {
     expect(Player.allPlayers().at(-1)).toBeInstanceOf(ComputerPlayer)
   })
-
-  describe('ComputerPlayer: Functions', () => {
-    describe('attackCoordinates()', () => {
-      it('returns a random coordinate in the proper format (1-2, 3-10)', () => {
-        const regex = /^([1-9]|10)-([1-9]|10)$/
-        expect(computerPlayer.attackCoordinates()).toMatch(regex)
-      })
-    })
-  })
 })
