@@ -1,5 +1,5 @@
 // ./src/tests/Player.test.js
-import Player from '../modules/Player.js'
+import { Player, ComputerPlayer } from '../modules/Player.js'
 import Gameboard from '../modules/Gameboard.js'
 
 describe('Player: Properties', () => {
@@ -29,6 +29,54 @@ describe('Player: Static Methods', () => {
     })
     it('returns an array of Player instances', () => {
       expect(Player.allPlayers()[0]).toBeInstanceOf(Player)
+    })
+  })
+
+  describe('clearPlayers()', () => {
+    it('removes all instances from record', () => {
+      Player.clearPlayers()
+      expect(Player.allPlayers().length).toBe(0)
+    })
+  })
+
+  describe('changeTurn()', () => {
+    it('toggles turn boolean for each Player instance', () => {
+      const computerPlayer = new ComputerPlayer()
+      expect(player.turn).toBe(true)
+      expect(computerPlayer.turn).toBe(false)
+
+      Player.changeTurn()
+      expect(player.turn).toBe(false)
+      expect(computerPlayer.turn).toBe(true)
+    })
+  })
+})
+
+describe('ComputerPlayer', () => {
+  let computerPlayer
+  beforeEach(() => {
+    computerPlayer = new ComputerPlayer()
+  })
+  
+  it('has a turn property set to false', () => {
+    expect(computerPlayer).toHaveProperty('turn')
+  })
+
+  it('has a gameboard instance', () => {
+    expect(computerPlayer).toHaveProperty('gameboard')
+    expect(computerPlayer.gameboard).toBeInstanceOf(Gameboard)
+  })
+
+  it('is stored in the Player class static variable array', () => {
+    expect(Player.allPlayers().at(-1)).toBeInstanceOf(ComputerPlayer)
+  })
+
+  describe('ComputerPlayer: Functions', () => {
+    describe('attackCoordinates()', () => {
+      it('returns a random coordinate in the proper format (1-2, 3-10)', () => {
+        const regex = /^([1-9]|10)-([1-9]|10)$/
+        expect(computerPlayer.attackCoordinates()).toMatch(regex)
+      })
     })
   })
 })
